@@ -10,7 +10,7 @@ import { BlockSpinner, BlockAxe, BlockLimbo } from "./Level";
 function App() {
   return (
     <>
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
       <OrbitControls makeDefault />
 
       <Physics>
