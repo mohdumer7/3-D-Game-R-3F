@@ -3,6 +3,7 @@ import { RigidBody, useRapier } from "@react-three/rapier";
 import { useKeyboardControls } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import useGame from "./stores/useGame";
 
 export default function Player() {
   const [subscribeKeys, getKeys] = useKeyboardControls();
@@ -12,6 +13,10 @@ export default function Player() {
   const [smoothCameraPosition] = useState(() => new THREE.Vector3(10, 10, 10));
   // const smoothCameraPosition = new THREE.Vector3();
   const [smoothCameraTarget] = useState(() => new THREE.Vector3());
+  const start = useGame((state) => state.start);
+  const end = useGame((state) => state.end);
+  const blocksCount = useGame((state) => state.blocksCount);
+  const restart = useGame((state) => state.restart);
 
   const jump = () => {
     const origin = body.current.translation();
@@ -35,8 +40,12 @@ export default function Player() {
         }
       }
     );
+
+    const unsubscribekeys = subscribeKeys(() => start());
+
     return () => {
       unsubscribeJump();
+      unsubscribekeys();
     };
   }, []);
 
@@ -88,6 +97,14 @@ export default function Player() {
 
     body.current.applyImpulse(impulse);
     body.current.applyTorqueImpulse(torque);
+
+    //checking if restart?
+    if (bodyPosition.z < blocksCount * 4 + 2) {
+      end();
+    }
+    if (bodyPosition.y < -4) {
+      restart();
+    }
   });
 
   return (
