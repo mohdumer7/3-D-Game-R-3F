@@ -4,7 +4,7 @@ import { Perf } from "r3f-perf";
 import Lights from "./Lights";
 import Level from "./Level";
 import { Physics, Debug } from "@react-three/rapier";
-
+import Player from "./Player";
 import { BlockSpinner, BlockAxe, BlockLimbo } from "./Level";
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
         <Debug />
         <Lights />
         <Level count={2} />
+        <Player />
       </Physics>
     </>
   );

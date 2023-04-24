@@ -3,15 +3,24 @@ import ReactDOM from "react-dom/client";
 import { Canvas, useFrame } from "@react-three/fiber";
 import App from "./App";
 import * as THREE from "three";
-import { Leva } from "leva";
+import { KeyboardControls } from "@react-three/drei";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Leva />
-
-    <Canvas camera={{}} shadows>
+  <KeyboardControls
+    map={[
+      { name: "forward", keys: ["ArrowUp", "KeyW"] },
+      { name: "backward", keys: ["ArrowDown", "KeyS"] },
+      { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
+      { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+      { name: "jump", keys: ["Space"] },
+    ]}
+  >
+    <Canvas
+      camera={{ fov: 45, near: 0.1, far: 200, position: [2.5, 4, 6] }}
+      shadows
+    >
       <App />
     </Canvas>
-  </React.StrictMode>
+  </KeyboardControls>
 );
