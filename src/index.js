@@ -4,6 +4,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import App from "./App";
 import * as THREE from "three";
 import { KeyboardControls } from "@react-three/drei";
+import Interface from "./interface";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,5 +23,6 @@ root.render(
     >
       <App />
     </Canvas>
+    <Interface />
   </KeyboardControls>
 );
