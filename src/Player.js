@@ -31,7 +31,21 @@ export default function Player() {
     }
   };
 
+  const reset = () => {
+    body.current.setTranslation({ x: 0, y: 1, z: 0 });
+    body.current.setLinvel({ x: 0, y: 0, z: 0 });
+    body.current.setAngvel({ x: 0, y: 0, z: 0 });
+  };
+
   useEffect(() => {
+    const unsuscribeReset = useGame.subscribe(
+      (state) => state.phase,
+      (value) => {
+        if (value === "ready") {
+          reset();
+        }
+      }
+    );
     const unsubscribeJump = subscribeKeys(
       (state) => state.jump,
       (value) => {
@@ -46,6 +60,7 @@ export default function Player() {
     return () => {
       unsubscribeJump();
       unsubscribekeys();
+      unsuscribeReset();
     };
   }, []);
 
@@ -99,7 +114,8 @@ export default function Player() {
     body.current.applyTorqueImpulse(torque);
 
     //checking if restart?
-    if (bodyPosition.z < blocksCount * 4 + 2) {
+
+    if (Math.abs(bodyPosition.z) > blocksCount * 4 + 2) {
       end();
     }
     if (bodyPosition.y < -4) {
