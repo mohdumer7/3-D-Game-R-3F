@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
     <Leva />
 
-    <Canvas camera={{}}>
+    <Canvas camera={{}} shadows>
       <App />
     </Canvas>
   </React.StrictMode>
