@@ -14,7 +14,7 @@ function App() {
       <OrbitControls makeDefault />
 
       <Physics>
-        <Debug />
+        {/* <Debug /> */}
         <Lights />
         <Level count={2} />
         <Player />
