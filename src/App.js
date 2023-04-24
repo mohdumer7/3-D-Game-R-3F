@@ -5,6 +5,8 @@ import Lights from "./Lights";
 import Level from "./Level";
 import { Physics, Debug } from "@react-three/rapier";
 
+import { BlockSpinner, BlockAxe, BlockLimbo } from "./Level";
+
 function App() {
   return (
     <>
@@ -14,7 +16,7 @@ function App() {
       <Physics>
         <Debug />
         <Lights />
-        <Level />
+        <Level count={2} />
       </Physics>
     </>
   );
