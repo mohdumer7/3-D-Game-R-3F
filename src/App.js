@@ -7,13 +7,14 @@ import { Physics, Debug } from "@react-three/rapier";
 import Player from "./Player";
 import { BlockSpinner, BlockAxe, BlockLimbo } from "./Level";
 import useGame from "./stores/useGame";
+import Effects from "./Effects";
 
 function App() {
   const blocksCount = useGame((state) => state.blocksCount);
   const blockSeed = useGame((state) => state.blockseed);
   return (
     <>
-      <color args={["#bdedfc"]} attach="background" />
+      <color args={["#252731"]} attach="background" />
       {/* <Perf position="top-left" /> */}
       {/* <OrbitControls makeDefault /> */}
 
@@ -23,6 +24,7 @@ function App() {
         <Level count={blocksCount} seed={blockSeed} />
         <Player />
       </Physics>
+      <Effects />
     </>
   );
 }
